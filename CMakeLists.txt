@@ -1,0 +1,76 @@
+cmake_minimum_required(VERSION 3.1)
+# Enable C++11
+project(OpenCV_Example)
+
+SET(CMAKE_BUILD_TYPE Release)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+SET(EXT_DIR ${CMAKE_SOURCE_DIR}/extern)
+
+SET(TBB_DIR ${EXT_DIR}/TBB)
+SET(TBB_LIB_PATH ${TBB_DIR}/lib)
+SET(TBB_LIB_PATH_RELEASE ${TBB_LIB_PATH}/release)
+SET(TBB_LIB_PATH_DEBUG ${TBB_LIB_PATH}/debug)
+
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+	message("RELEASE")
+	set(TBB_LIB_PATH ${TBB_LIB_PATH_RELEASE})
+	SET(OPENBLAS_DIR ${EXT_DIR}/OpenBLAS)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	message("DEBUG")
+	set(TBB_LIB_PATH ${TBB_LIB_PATH_DEBUG})
+	set(OPENBLAS_DIR ${EXT_DIR}/OpenBLAS/debug)
+
+endif()
+
+SET(TBB_INCLUDE ${TBB_DIR}/include)
+set(TBB_LIBS tbb;tbbmalloc;tbbmalloc_proxy)
+
+
+SET(OPENBLAS_VERSION "0.3.5")
+SET(OPENBLAS_LIB_PATH ${OPENBLAS_DIR}/lib)
+SET(OPENBLAS_INCLUDE_DIRS ${OPENBLAS_DIR}/include)
+SET(OPENBLAS_LIBS ${OPENBLAS_LIB_PATH}/libopenblas.so)
+
+SET(ATLAS_DIR ${EXT_DIR}/ATLAS)
+SET(ATLAS_LIB_PATH ${ATLAS_DIR}/lib)
+SET(ATLAB_LIBS lapack;cblas)
+
+SET(VTK_DIR ${EXT_DIR}/VTK)
+SET(VTK_LIB_PATH ${VTK_DIR}/lib)
+SET(VTK_INCLUDE_DIRS ${VTK_DIR}/include)
+
+set(ENV{LD_LIBRARY_PATH} "$ENV{LD_LIBRARY_PATH}:${TBB_LIB_PATH}:${OPENBLAS_LIB_PATH}:${VTK_LIB_PATH}:${ATLAS_LIB_PATH}")
+
+
+SET(OpenCV_DIR ${EXT_DIR}/OpenCV)
+
+find_package( OpenCV REQUIRED PATHS ${OpenCV_DIR})
+
+message("TBB_FOUND=${TBB_FOUND}")
+message("TBB_ROOT=${TBB_ROOT}")
+message("TBB_IMPORTED_TARGETS=${TBB_IMPORTED_TARGETS}")
+
+message("OpenCV_FOUND=${OpenCV_FOUND}")
+
+message("OpenCV_INCLUDE_DIRS=${OpenCV_INCLUDE_DIRS}")
+message("OpenCV_LIBS=${OpenCV_LIBS}")
+
+
+MESSAGE(ENV{OPAL_PREFIX}=$ENV{OPAL_PREFIX})
+MESSAGE(ENV{LD_LIBRARY_PATH}=$ENV{LD_LIBRARY_PATH})
+
+
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( ${PROJECT_NAME}
+#        ImageUtils.cpp ImageUtils.h
+#        AppendVids.c
+         main.cpp
+
+        )
+
+target_link_directories( ${PROJECT_NAME} PUBLIC ${OpenCV_DIR}/lib ${TBB_LIB_PATH} ${OPENBLAS_LIB_PATH} ${VTK_LIB_PATH} ${ATLAS_LIB_PATH})
+target_link_libraries( ${PROJECT_NAME} ${OpenCV_LIBS} ${TBB_IMPORTED_TARGETS} ${TBB_LIBS} ${OPENBLAS_LIBS} ${ATLAS_LIBS})

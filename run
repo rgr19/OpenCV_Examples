@@ -1,0 +1,9 @@
+#!/bin/bash
+
+~/W/W.priv/Extern/CMake/bin/cmake -H. -Bcmake-build
+
+LIBS=extern/OpenCV/lib;extern/OpenBLAS/lib;extern/TBB/lib;extern/VTK/lib 
+
+LD_LIBRARY_PATH=$LIBS make -C cmake-build
+
+LD_LIBRARY_PATH=$LIBS ./cmake-build/OpenCV_Example

@@ -1,0 +1,12 @@
+set(vtkUtilitiesBenchmarks_LOADED 1)
+set(vtkUtilitiesBenchmarks_DEPENDS "vtkChartsCore;vtkCommonComputationalGeometry;vtkCommonCore;vtkCommonDataModel;vtkCommonSystem;vtkCommonTransforms;vtkDomainsChemistry;vtkFiltersCore;vtkFiltersSources;vtkIOCore;vtkImagingCore;vtkRenderingContext2D;vtkRenderingContextOpenGL2;vtkRenderingCore;vtkRenderingOpenGL2;vtkRenderingVolume;vtkRenderingVolumeOpenGL2;vtkViewsContext2D;vtksys")
+set(vtkUtilitiesBenchmarks_LIBRARIES "vtkCommonComputationalGeometry;vtkCommonCore;vtkCommonDataModel;vtkCommonSystem;vtkCommonTransforms;vtkDomainsChemistry;vtkFiltersCore;vtkFiltersSources;vtkImagingCore;vtkRenderingContextOpenGL2;vtkRenderingCore;vtkRenderingOpenGL2;vtkRenderingVolume;vtkRenderingVolumeOpenGL2;vtksys")
+set(vtkUtilitiesBenchmarks_INCLUDE_DIRS "${VTK_INSTALL_PREFIX}/include/vtk-8.2")
+set(vtkUtilitiesBenchmarks_LIBRARY_DIRS "")
+set(vtkUtilitiesBenchmarks_RUNTIME_LIBRARY_DIRS "${VTK_INSTALL_PREFIX}/lib")
+set(vtkUtilitiesBenchmarks_WRAP_HIERARCHY_FILE "${CMAKE_CURRENT_LIST_DIR}/vtkUtilitiesBenchmarksHierarchy.txt")
+set(vtkUtilitiesBenchmarks_KIT "")
+set(vtkUtilitiesBenchmarks_TARGETS_FILE "")
+set(vtkUtilitiesBenchmarks_EXCLUDE_FROM_WRAPPING 1)
+
+
